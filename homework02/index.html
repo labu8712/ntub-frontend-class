@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Arthur's Register Form</title>
+</head>
+
+<body>
+  <form action="finish.html" method="get">
+    <fieldset>
+      <h1>This is a register form.</h1>
+    </fieldset>
+    <p>
+      <label for="name"><span style="color: red;">*</span>Name: </label>
+      <input type="text" name="name" id="name" required>
+    </p>
+    <p>
+      <label for="english_name"><span style="color: red;">*</span>English name: </label>
+      <input type="text" name="english_name" id="english_name" required>
+    </p>
+    <p>
+      <span><span style="color: red;">*</span>Gender: </span>
+      <div>
+        <input type="radio" name="gender" id="male" value="male" required>
+        <label for="male">Male</label>
+      </div>
+      <div>
+        <input type="radio" name="gender" id="female" value="female" required>
+        <label for="female">Female</label>
+      </div>
+      <div>
+        <input type="radio" name="gender" id="others" value="others" required>
+        <label for="others">Others</label>
+      </div>
+    </p>
+    <p>
+      <label for="birthday"><span style="color: red;">*</span>Birthday: </label>
+      <input type="date" name="birthday" id="birthday" required>
+    </p>
+    <p>
+      <label for="phone_number"><span style="color: red;">*</span>Phone Number: </label>
+      <input type="tel" name="phone_number" id="phone_number" required>
+    </p>
+    <p>
+      <label for="email"><span style="color: red;">*</span>Email: </label>
+      <input type="text" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+    </p>
+    <p>
+      <label for="fb_link">Facebook link: </label>
+      <input type="url" name="fb_link" id="fb_link">
+    </p>
+    <p>
+      <label for="favorite_color">Favorite color: </label>
+      <input type="color" name="favorite_color" id="favorite_color">
+    </p>
+    <p>
+      <label for="hate_color">Hate color: </label>
+      <input type="color" name="hate_color" id="hate_color">
+    </p>
+    <p>
+      <label for="location"><span style="color: red;">*</span>Location: </label>
+      <select name="location" id="location" required>
+        <option value="north">North</option>
+        <option value="east">East</option>
+        <option value="center">Center</option>
+        <option value="west">West</option>
+        <option value="south">South</option>
+        <option value="outland">Outland</option>
+        <option value="others">Others</option>
+      </select>
+    </p>
+    <p>
+      <span>Transportation: </span>
+      <div>
+        <input type="checkbox" name="transportation" id="car" value="car">
+        <label for="car">Car</label>
+      </div>
+      <div>
+        <input type="checkbox" name="transportation" id="bus" value="bus">
+        <label for="bus">Bus</label>
+      </div>
+      <div>
+        <input type="checkbox" name="transportation" id="walk" value="walk">
+        <label for="walk">Walk</label>
+      </div>
+      <div>
+        <input type="checkbox" name="transportation" id="mrt" value="mrt">
+        <label for="mrt">MRT</label>
+      </div>
+      <div>
+        <input type="checkbox" name="transportation" id="moto" value="moto">
+        <label for="moto">Moto</label>
+      </div>
+      <div>
+        <input type="checkbox" name="transportation" id="airplane" value="airplane">
+        <label for="airplane">Airplane</label>
+      </div>
+    </p>
+    <fieldset>
+      <legend>Please setup your username and password</legend>
+      <p>
+        <label for="username"><span style="color: red;">*</span>Username: </label>
+        <input type="text" name="username" id="username" required>
+      </p>
+      <p>
+        <label for="password"><span style="color: red;">*</span>Password: </label>
+        <input type="password" name="password" id="password" required>
+      </p>
+      <p>
+        <label for="password_confirm"><span style="color: red;">*</span>Password confirm: </label>
+        <input type="password" name="password" id="password_confirm" required>
+      </p>
+    </fieldset>
+    <p>
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+    </p>
+  </form>
+</body>
+
+</html>
