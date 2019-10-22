@@ -1,0 +1,181 @@
+@charset "utf-8";
+
+@font-face {
+  font-family: GloriaHallelujah-Regular;
+  src: url(media/Gloria_Hallelujah/GloriaHallelujah-Regular.ttf);
+}
+
+* {
+  font-family: "微軟正黑體";
+}
+
+body {
+  background-image: url(media/MRT_M+.jpg);
+  background-repeat: repeat-y;
+  background-position: right;
+}
+
+#title {
+  font-size: 66px;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  text-shadow:
+    0 1px 0 red,
+    0 2px 0 orange,
+    0 3px 0 yellow,
+    0 4px 0 green,
+    0 5px 0 blue,
+    0 6px 0 indigo,
+    0 7px 0 violet;
+}
+
+#author {
+  font-family: 'GloriaHallelujah-Regular';
+  font-size: 36px;
+  font-weight: bolder;
+  color: purple;
+  background-color: yellow;
+  text-align: center;
+}
+
+#about-mrt {
+  font-weight: bold;
+  color: navy;
+  text-indent: 1em;
+}
+
+#introduction {
+  font-size: 16px;
+  font-weight: bolder;
+  color: purple;
+  background-color: silver;
+  border-bottom: 3px dashed pink;
+}
+
+#target {
+  font-size: 12px;
+  color: navy;
+  text-indent: 1em;
+}
+
+#things-title {
+  font-size: 36px;
+  color: brown;
+  text-shadow: 1px 1px violet;
+}
+
+h1 {
+  font-size: 66px;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+}
+
+h2 {
+  font-size: 36px;
+  color: brown;
+  text-shadow: 1px 1px violet;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: brown;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: purple;
+}
+
+p {
+  font-size: 12px;
+  color: navy;
+  letter-spacing: 1em;
+}
+
+figcaption {
+  font-size: 12px;
+  line-height: 1em;
+  color: navy;
+}
+
+table {
+  border: 2px brown solid;
+}
+
+ol {
+  color: red;
+  font-size: 18px;
+}
+
+li {
+  color: blue;
+  font-size: 16px;
+}
+
+th {
+  font-size: 18px;
+}
+
+td {
+  border: 2px brown solid;
+}
+
+div {
+  margin: 3em;
+  padding: 2px;
+}
+
+.box_tickets {
+  color: purple;
+  font-size: 36px;
+  font-weight: bolder;
+  border: 5px dotted orange;
+  border-radius: 20px;
+  height: 100%;
+  width: 50%;
+  margin: 10em;
+  padding: 10px;
+  float: left;
+}
+
+.box_mrtroute {
+  color: teal;
+  font-size: 36px;
+  font-weight: bolder;
+  text-align: right;
+  border: 5px dotted white;
+  border-radius: 20px;
+  background-color: bisque;
+  line-height: 1em;
+  transition: 80%;
+  float: left;
+}
+
+.box_media {
+  border-radius: 20px;
+  margin: 5em;
+}
+
+a:link {
+  color: red;
+}
+
+a:visited {
+  color: magenta;
+}
+
+a:hover {
+  color: orange;
+}
+
+a:focus {
+  color: lemonchiffon;
+}
+
+a:active {
+  color: yellow;
+}
