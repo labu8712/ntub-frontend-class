@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Arthur 的點餐系統</title>
+
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">Arthur's 點餐系統</span>
+  </nav>
+
+  <div class="container my-3" id="app">
+    <div class="row">
+      <div class="col">
+        <p class="float-right">總價：${{ totalPrice }}</p>
+        <h1>餐點</h1>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-4" v-for="(meal, index) in meals">
+        <div class="card mb-3">
+          <img :src="meal.image" class="card-img-top" :alt="meal.name">
+          <div class="card-body">
+            <h5 class="card-title">{{ meal.name }}</h5>
+
+            <p>單價：${{ meal.price }}</p>
+
+            <div class="form-group form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                :id="'check-' + index"
+                @change="selectChanged()"
+                v-model="meal.selected"
+              >
+              <label class="form-check-label" :for="'check-' + index">選取 {{ meal.name }}</label>
+            </div>
+
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" :id="'basic-addon' + index">數量</span>
+              </div>
+              <input
+                type="number"
+                class="form-control"
+                placeholder="數量"
+                aria-label="數量"
+                min="0"
+                :disabled="!meal.selected"
+                :aria-describedby="'basic-addon' + index"
+                @change="countChanged()"
+                v-model="meal.count"
+              >
+            </div>
+
+            <p class="mt-3">價格：{{ meal.price * meal.count }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <script src="assets/js/popper.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/vue.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        totalPrice: 0,
+        meals: [
+          { name: 'A', image: 'assets/images/foods/1.png', price: 100, selected: false, count: 0 },
+          { name: 'B', image: 'assets/images/foods/2.png', price: 110, selected: false, count: 0 },
+          { name: 'C', image: 'assets/images/foods/3.png', price: 120, selected: false, count: 0 },
+          { name: 'D', image: 'assets/images/foods/4.png', price: 130, selected: false, count: 0 },
+          { name: 'E', image: 'assets/images/foods/5.png', price: 140, selected: false, count: 0 },
+          { name: 'F', image: 'assets/images/foods/6.png', price: 150, selected: false, count: 0 },
+        ],
+      },
+      created() {
+        this.getTotalPrice();
+      },
+      methods: {
+        selectChanged() {
+          console.log('a')
+          this.meals.map(meal => {
+            if (!meal.selected) {
+              meal.count = 0;
+            } else if (meal.selected && meal.count < 1) {
+              meal.count = 1;
+            }
+
+            return meal;
+          })
+          this.getTotalPrice();
+        },
+        countChanged() {
+          this.meals.map(meal => {
+            if (meal.count < 1) {
+              meal.selected = false;
+              meal.count = 0;
+            }
+
+            return meal;
+          });
+          this.getTotalPrice();
+        },
+        getTotalPrice() {
+          this.totalPrice = this.meals.map(m => m.count * m.price).reduce((r, c) => r + c);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
