@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Arthur 的 Javascript</title>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/main.js"></script>
+</head>
+
+<body>
+  <fieldset id="now">
+    <legend>顯示現在時間</legend>
+    <p id="now-result">今天是 2019/11/11 上課中</p>
+    <button id="now-button" onclick="now()">計算</button>
+  </fieldset>
+
+  <fieldset id="p1">
+    <legend>練習正方形面積</legend>
+    <p id="p1-result">計算結果</p>
+    <button id="p1-button" onclick="p1()">計算</button>
+  </fieldset>
+
+  <fieldset id="p2">
+    <legend>練習圓形面積</legend>
+    <p id="p2-result">計算結果</p>
+    <button id="p2-button" onclick="p2()">計算</button>
+  </fieldset>
+
+  <fieldset id="p3">
+    <legend>練習三角形面積</legend>
+    <p id="p3-result">計算結果</p>
+    <button id="p3-button" onclick="p3()">計算</button>
+  </fieldset>
+
+  <fieldset id="p4">
+    <legend>請問以下區塊是什麼顏色呢？</legend>
+    <div id="p4-topic"></div>
+    <p id="p4-result">判斷結果</p>
+    <input type="radio" name="p4-color" id="p4-red"><label for="p4-red" id="p4-red-label">紅色</label>
+    <input type="radio" name="p4-color" id="p4-green"><label for="p4-green" id="p4-green-label">綠色</label>
+    <input type="radio" name="p4-color" id="p4-blue"><label for="p4-blue" id="p4-blue-label">藍色</label>
+    <script>
+      setP4();
+    </script>
+    <p>
+      <button id="p3-button" onclick="p4()">判斷</button>
+    </p>
+  </fieldset>
+
+  <fieldset id="p5">
+    <legend>判斷下列為何種動物？</legend>
+    <img src="assets/images/panda.jpg" alt="panda">
+    <p id="p5-result">判斷結果</p>
+    <select id="p5-animal">
+      <option value="bear">熊</option>
+      <option value="cat">貓</option>
+      <option value="panda">熊貓</option>
+    </select>
+    <button id="p5-button" onclick="p5()">判斷</button>
+  </fieldset>
+
+  <fieldset id="p6">
+    <legend>判斷最後的結果為？</legend>
+    <img src="assets/images/fruit-math.jpg" alt="math">
+    <p id="p6-result">計算結果</p>
+    <button id="p6-button" onclick="p6()">計算</button>
+  </fieldset>
+
+  <fieldset id="p7">
+    <legend>判斷奇偶數</legend>
+    <p id="p7-result">計算結果</p>
+    <button id="p7-button" onclick="p7()">計算</button>
+  </fieldset>
+
+  <fieldset id="p8">
+    <legend>數字加總</legend>
+    <p id="p8-result">計算結果</p>
+    <button id="p8-button" onclick="p8()">計算</button>
+  </fieldset>
+
+  <fieldset id="p9">
+    <legend>溫度換算 (攝氏轉華氏)</legend>
+    <p id="p9-result">計算結果</p>
+    <button id="p9-button" onclick="p9()">計算</button>
+  </fieldset>
+
+  <fieldset id="p10">
+    <legend>閏年、平年判斷</legend>
+    <p id="p10-result">判斷結果</p>
+    <button id="p10-button" onclick="p10()">判斷</button>
+  </fieldset>
+</body>
+
+</html>
