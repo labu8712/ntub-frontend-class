@@ -1,0 +1,19 @@
+#clock .col {
+  padding: 0;
+}
+
+#clock img.number {
+  max-width: 100%;
+}
+
+#clock img.colon {
+  max-width: 50%;
+}
+
+.text-line-through {
+  text-decoration: line-through !important;
+}
+
+.color-example {
+  width: 100%;
+}

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Arthur's TODO List</title>
+
+  <link rel="stylesheet" href="assets/library/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <script defer src="assets/library/fontawesome/all.min.js"></script>
+  <script src="assets/library/jquery/jquery-3.3.1.min.js"></script>
+  <script src="assets/library/popper/popper.min.js"></script>
+  <script src="assets/library/bootstrap/bootstrap.min.js"></script>
+  <script src="assets/library/vue/vue.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</head>
+
+<body>
+  <div class="container my-3">
+    <div class="row align-items-center text-center" id="clock"></div>
+
+    <div class="row">
+      <div class="col-12">
+        <hr>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col">
+        <div class="alert alert-danger">
+          Priority 1
+        </div>
+      </div>
+      <div class="col">
+        <div class="alert alert-warning">
+          Priority 2
+        </div>
+      </div>
+      <div class="col">
+        <div class="alert alert-primary">
+          Priority 3
+        </div>
+      </div>
+      <div class="col">
+        <div class="alert alert-secondary">
+          Done
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="todo-list">
+      <div class="col-12">
+        <h3>Add todo</h3>
+        <select
+          class="custom-select custom-select-lg"
+          v-model="priority"
+          :disabled="step > 0"
+          @keyup.enter="step++"
+          @change="step = 1"
+          @keyup.esc="step--"
+        >
+          <option value="0" disabled>----------</option>
+          <option value="1">Priority 1</option>
+          <option value="2">Priority 2</option>
+          <option value="3">Priority 3</option>
+        </select>
+        <input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="Title"
+          :readonly="step !== 1"
+          v-show="step >= 1"
+          v-model="title"
+          v-focus="step === 1"
+          @keyup.enter="title && step++"
+          @keyup.esc="step--"
+        >
+        <input
+          class="form-control form-control-lg"
+          type="text"
+          placeholder="Content"
+          :readonly="step !== 2"
+          v-show="step >= 2"
+          v-model="content"
+          v-focus="step === 2"
+          @keyup.enter="content && addTodo()"
+          @keyup.esc="step--"
+        >
+      </div>
+
+      <div class="col-12">
+        <div
+          class="alert alert-info my-5"
+          role="alert"
+          v-if="todos.length === 0"
+        >
+          <h4 class="text-center m-0">
+            NO TODOS
+          </h4>
+        </div>
+        <div
+          class="card mt-3 text-white"
+          v-for="(todo, index) in todos"
+          :class="{
+            'bg-danger': todo.priority == 1 && !todo.done,
+            'bg-warning': todo.priority == 2 && !todo.done,
+            'bg-primary': todo.priority == 3 && !todo.done,
+            'bg-secondary': todo.done,
+          }"
+        >
+          <div class="card-header">
+            <input
+              class="mr-1"
+              type="checkbox"
+              v-model="todo.done"
+              v-if="editTodoIndex !== index"
+            >
+            <span
+              :class="{ 'text-line-through': todo.done && editTodoIndex !== index }"
+              v-if="editTodoIndex !== index"
+            >
+              {{ todo.title }}
+            </span>
+            <input
+              class="form-control"
+              type="text"
+              v-model="todo.title"
+              v-if="editTodoIndex === index"
+              @keyup.enter="finishEdit()"
+            >
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              <span
+                v-if="editTodoIndex !== index"
+                :class="{ 'text-line-through': todo.done && editTodoIndex !== index }"
+              >
+                {{ todo.content }}
+              </span>
+
+              <input
+                class="form-control"
+                type="text"
+                v-model="todo.content"
+                v-if="editTodoIndex === index"
+                @keyup.enter="finishEdit()"
+              >
+
+              <select
+                class="custom-select mt-2"
+                v-model="todo.priority"
+                v-if="editTodoIndex === index"
+              >
+                <option value="0" disabled>----------</option>
+                <option value="1">Priority 1</option>
+                <option value="2">Priority 2</option>
+                <option value="3">Priority 3</option>
+              </select>
+
+              <button
+                class="btn btn-outline-info btn-sm float-right mt-2"
+                v-if="editTodoIndex === index"
+                @click="finishEdit()"
+              >
+                Done
+              </button>
+            </p>
+          </div>
+          <div class="card-footer">
+            <span :class="{ 'text-line-through': todo.done && editTodoIndex !== index }">
+              {{ todo.createAt.toLocaleString() }}
+            </span>
+            <button
+              class="btn float-right p-0 ml-3"
+              @click="removeTodo(index)"
+            >
+              <i class="fas fa-trash-alt text-white"></i>
+            </button>
+            <button
+              class="btn float-right p-0 ml-3"
+              @click="editTodo(index)"
+              v-if="editTodoIndex !== index && !todo.done"
+            >
+              <i class="fas fa-edit text-white"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(function () {
+      setClock();
+      setInterval(setClock, 1000);
+    })
+
+    new Vue({
+      el: '#todo-list',
+      data: {
+        step: 0,
+        priority: 0,
+        title: '',
+        content: '',
+        editTodoIndex: null,
+        todos: [],
+      },
+      methods: {
+        addTodo() {
+          this.todos.unshift({
+            title: this.title,
+            content: this.content,
+            priority: this.priority,
+            createAt: new Date(),
+            done: false,
+          })
+
+          this.setDefault();
+        },
+        editTodo(index) {
+          this.editTodoIndex = index;
+        },
+        removeTodo(index) {
+          this.todos = this.todos.filter((_, i) => {
+            return i !== index;
+          })
+        },
+        finishEdit() {
+          this.editTodoIndex = null;
+        },
+        setDefault() {
+          this.title = '';
+          this.content = '';
+          this.step = -1;
+          this.priority = 0;
+        }
+      },
+      directives: {
+        focus(el, binding) {
+          if (binding.value) {
+            el.focus();
+          }
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
