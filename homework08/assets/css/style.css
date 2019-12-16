@@ -1,0 +1,32 @@
+#title-row {
+  color: white;
+  background-color: #dc3545;
+}
+
+@media (min-width: 576px) {
+  #title-row {
+    color: white;
+    background-color: #fd7e14;
+  }
+}
+
+@media (min-width: 768px) {
+  #title-row {
+    color: white;
+    background-color: #ffc107;
+  }
+}
+
+@media (min-width: 992px) {
+  #title-row {
+    color: white;
+    background-color: #28a745;
+  }
+}
+
+@media (min-width: 1200px) {
+  #title-row {
+    color: white;
+    background-color: #17a2b8;
+  }
+}

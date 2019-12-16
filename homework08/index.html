@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Arthur's TODO List</title>
+
+  <link rel="stylesheet" href="assets/library/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <script defer src="assets/library/fontawesome/all.min.js"></script>
+  <script src="assets/library/jquery/jquery-3.3.1.min.js"></script>
+  <script src="assets/library/popper/popper.min.js"></script>
+  <script src="assets/library/bootstrap/bootstrap.min.js"></script>
+  <script src="assets/library/vue/vue.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</head>
+
+<body>
+  <h1 class="display-4 text-center p-3" id="title-row">
+    拉布拉多犬
+  </h1>
+
+  <div class="container my-3" id="app">
+    <div class="row">
+      <div class="col-12">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li
+            class="nav-item"
+            v-for="(tab, index) in tabs"
+          >
+            <a
+              class="nav-link"
+              data-toggle="pill"
+              role="tab"
+              :id="buildID(tab.name, 'tab')"
+              :href="buildHref(tab.name)"
+              :class="{ active: tab.selected }"
+              :aria-selected="tab.selected"
+              :aria-controls="buildControls(tab.name)"
+            >
+              {{ tab.title }}
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tab-content">
+          <div
+            class="tab-pane fade"
+            role="tabpanel"
+            v-for="(tab, index) in tabs"
+            :id="buildID(tab.name)"
+            :class="{ show: tab.selected, active: tab.selected }"
+            :aria-labelledby="buildID(tab.name, 'tab')"
+          >
+            <p v-for="content in tab.contents">
+              {{ content }}
+            </p>
+
+            <div class="row" v-if="tab.images">
+              <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <img
+                  class="my-2"
+                  v-for="image in tab.images"
+                  :src="image"
+                  :alt="tab.name"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        tabs: [
+          {
+            selected: true,
+            name: 'introduction',
+            title: '簡介',
+            contents: [
+              '拉布拉多犬或稱拉布拉多拾獵犬（簡稱拉布拉多；英語：Labrador Retriever）是一種中大型犬類，天生個性溫和、活潑、沒有攻擊性和智能高，是適合被選作導盲犬或其他工作犬的狗品種，跟黃金獵犬、哈士奇並列三大無攻擊性犬類之一。',
+              '在美國犬業俱樂部中拉布拉多是目前登記數量最多的品種。',
+            ],
+            images: [
+              'assets/image/dogs/1.jpg',
+              'assets/image/dogs/2.jpg',
+              'assets/image/dogs/3.jpg',
+            ],
+          },
+          {
+            selected: false,
+            name: 'appearance',
+            title: '外表',
+            contents: [
+              '毛屬短毛，外層直且緊密內則為柔軟且能防水禦寒的內層毛皮，如水獺般的跟腳趾間的蹼使牠們非常適於游泳。',
+              '拉布拉多的標準顏色有三種：黑色、黃色、巧克力色。',
+              '是由兩組基因控制，一組控制毛色有黑黃兩種，另一組控制鼻頭的顏色有黑色跟粉紅色，巧克力色是黑色基因跟粉紅色鼻頭基因的組合，黃色系拉布拉多則有兩種鼻頭顏色的可能，而黑色就是全深色的組合。',
+            ],
+            images: [
+              'assets/image/dogs/4.jpg',
+            ],
+          },
+          {
+            selected: false,
+            name: 'body',
+            title: '體型',
+            contents: [
+              '拉布拉多犬屬於中大型犬，身型大約 55~62 公分，體重大約在 25~34 公斤左右。',
+              '公犬身高：22.5~24.5 英吋，體重：65~80 磅。',
+              '母犬身高：21.5~23.5 英吋，體重：55~70 磅。',
+            ],
+            images: [
+              'assets/image/dogs/5.jpg',
+            ],
+          },
+          {
+            selected: false,
+            name: 'life',
+            title: '壽命',
+            contents: [
+              '平均壽命：10～15歲。 ',
+              '像其他類型的犬一樣，英系和美系的拉布拉多尋回犬有些許差異。跟美系的更大點的拉布拉多相比，英格蘭的拉布拉多是中等大小、更短、矮壯的。AKC 沒有作出區分，但兩種分類來自於不同的血統。拉布拉多尋回犬也存在澳洲血系，在亞洲是很常見的，但在西方國家很少見到。 ',
+              '該犬種趨向於在整年裡經常掉毛。它的毛通常相當地短和直，尾巴粗並有勁。拉不拉多尋回犬那像水獺的尾巴和帶蹼的腳趾使得他們非常善於游泳。他們的雙層皮毛相對比較防水，這也對他們游泳提供了有利條件。尾巴扮演著尾舵的角色來控制方向。 ',
+              '不熟悉獵犬的許多人發現拉布拉多犬和黃金獵犬在大小、形狀、顏色上相近，尤其是年幼的和淺色的黃金獵犬和拉布拉多尋回犬特別相像。他們的個性是如此的相近，兩個犬種都很聰明、友好、好於表揚和易於訓練。最顯著的不同是拉布拉多犬有短而直的皮毛、厚實的水獺尾，而黃金獵犬的皮毛長而呈波浪狀、尾巴像大羽毛。',
+            ],
+            images: [],
+          },
+          {
+            selected: false,
+            name: 'history',
+            title: '歷史',
+            contents: [
+              '拉布拉多被認為源自於紐芬蘭島，紐芬蘭島如今是加拿大紐芬蘭與拉布拉多省的一部分。',
+              '拉布拉多來自於聖·約翰水犬（已絕跡），這種狗是一種本地的水狗和紐芬蘭狗的雜交，和拉布拉多的淵源頗深。Earl of Malmesbury 和其他英格蘭飼養主們為了把這種狗和紐芬蘭犬區分開而將它們起名為「拉布拉多」。拉布拉多尋回犬最初叫做「小紐芬蘭」或者「聖·約翰」犬。其他的名字起源包括有西班牙和葡萄牙語中的工人「拉布拉多瑞斯」，還包括葡萄牙的Castro Laboreiro村（他們的畜牧及守衛犬與拉布拉多非常相似）許多漁夫最初使用拉布拉多來協助拖網上岸，它能咬住飄浮的網邊的軟木並把網拖回岸上。',
+              '已知最早對拉布拉多的紙面記載是1814年的「給年輕運動員的指導」。1823年運動畫家 Edwin Landseer 畫了一隻帶白色斑紋的黑狗名為「考拉——一隻拉布拉多母犬」。那時這個犬種似乎已經確定地被人們接受，19世紀末已經有一些貴族擁有或者飼養拉布拉多。第一隻有記載的黃色拉布拉多叫Ben of Hyde，生於1899年。',
+              '現代的拉布拉多是最老的現代犬協中的品種。AKC的血系族譜可以追溯到1878年。倫敦犬業俱樂部在1903年認可了拉布拉多。1917年AKC登記第一隻拉布拉多，許多英格蘭的狗在二戰後被引進，這些狗奠定了拉布拉多美國品種的基礎。',
+            ],
+            images: [],
+          },
+        ],
+      },
+      methods: {
+        buildID(name, mode) {
+          args = ['pills', name];
+
+          if (typeof mode !== 'undefined') {
+            args.push(mode);
+          }
+
+          return args.join('-');
+        },
+        buildHref(name) {
+          return `#pills-${name}`;
+        },
+        buildControls(name) {
+          return `pills-${name}`;
+        },
+      }
+    })
+  </script>
+</body>
+
+</html>
